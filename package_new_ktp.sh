@@ -13,14 +13,7 @@ ktp-kded-integration-module
 ktp-send-file
 ktp-text-ui"
 
-old_release=$1
-new_release=$2
 cur_dir=$PWD
-
-echo "Old release is : " $1
-echo "\n"
-echo "New release is : " $2
-echo "\n"
 
 for repo in $REPOS
 do
@@ -33,7 +26,7 @@ do
     uupdate ../${repo}_${2}.orig.tar.bz2
     cd ../$repo-$2
     sed -i "s,libktpcommoninternalsprivate-dev (>= $1),libktpcommoninternalsprivate-dev (>= $2)," debian/control
-    dch --release --distribution trusty ""
+    dch --release --distribution $3 ""
     debuild -S -sa
     cd $cur_dir
 done
